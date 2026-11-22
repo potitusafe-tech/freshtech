@@ -1,0 +1,1280 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fresh Tech - smart solutions for modern business.">
+  <title>Fresh Tech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #202124;
+      --green: #55585c;
+      --lime: #e8e9eb;
+      --cream: #f4f4f5;
+      --white: #fff;
+      --muted: #666a70;
+      --line: #e2e3e5;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Prompt", sans-serif;
+      color: var(--ink);
+      background: var(--white);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 48px));
+      margin-inline: auto;
+    }
+
+    .topbar {
+      height: 36px;
+      display: grid;
+      place-items: center;
+      background: var(--ink);
+      color: var(--white);
+      font-size: 13px;
+      letter-spacing: .02em;
+    }
+
+    nav {
+      height: 86px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, .96);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: "Prompt", sans-serif;
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -.04em;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 50% 50% 48% 52%;
+      background: var(--lime);
+      transform: rotate(-8deg);
+    }
+
+    .brand-mark span {
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--ink);
+      border-radius: 50%;
+      transform: rotate(8deg);
+      position: relative;
+    }
+
+    .brand-mark span::after {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--ink);
+      position: absolute;
+      top: 3px;
+      left: 3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .nav-links a {
+      transition: color .2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--green);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .icon-button,
+    .menu-button {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--white);
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .menu-button {
+      display: none;
+    }
+
+    .button {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 22px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--ink);
+      color: var(--white);
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      background: var(--green);
+    }
+
+    .button-light {
+      background: var(--lime);
+      color: var(--ink);
+    }
+
+    .slide-viewport {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .slide-track {
+      display: flex;
+      align-items: stretch;
+      width: 200%;
+      transition: transform .7s cubic-bezier(.22, .75, .25, 1);
+    }
+
+    .slide-track.show-services {
+      transform: translateX(-50%);
+    }
+
+    .slide-panel {
+      flex: 0 0 50%;
+      min-width: 0;
+    }
+
+    #intro-slide {
+      background: var(--cream);
+    }
+
+    .slide-controls {
+      margin-top: 36px;
+    }
+
+    .hero {
+      min-height: 620px;
+      overflow: hidden;
+      background: var(--cream);
+      position: relative;
+    }
+
+    .hero-grid {
+      min-height: 620px;
+      display: grid;
+      grid-template-columns: 48% 52%;
+      align-items: center;
+    }
+
+    .hero-copy {
+      max-width: 560px;
+      padding: 72px 48px 72px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 2px;
+      background: var(--lime);
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Prompt", sans-serif;
+    }
+
+    h1 {
+      max-width: 600px;
+      margin: 0;
+      font-size: clamp(48px, 6vw, 78px);
+      line-height: .98;
+      letter-spacing: -.065em;
+    }
+
+    .hero-copy p {
+      max-width: 510px;
+      margin: 24px 0 32px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .hero-next {
+      margin-top: 18px;
+    }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 4px;
+      background: none;
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+      cursor: pointer;
+    }
+
+    .work-dialog {
+      width: min(1080px, calc(100% - 32px));
+      max-height: calc(100vh - 48px);
+      padding: 0;
+      border: 0;
+      border-radius: 24px;
+      color: var(--ink);
+      background: var(--white);
+      box-shadow: 0 24px 80px rgba(24, 48, 38, .24);
+    }
+
+    .work-dialog::backdrop {
+      background: rgba(18, 20, 22, .66);
+      backdrop-filter: blur(6px);
+    }
+
+    .work-dialog-shell {
+      max-height: calc(100vh - 48px);
+      overflow: hidden;
+    }
+
+    .work-dialog-header {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .work-dialog-header h2 {
+      margin: 0;
+      font-size: 24px;
+      letter-spacing: -.04em;
+    }
+
+    .work-dialog-close {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      flex: 0 0 auto;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--white);
+      color: var(--ink);
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .work-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      max-height: calc(100vh - 126px);
+      overflow-y: auto;
+      padding: 24px;
+      background: #f7f7f8;
+    }
+
+    .work-card {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--white);
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .work-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(24, 48, 38, .12);
+    }
+
+    .work-visual {
+      aspect-ratio: 4 / 3;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(145deg, #dde2e5, #f5f6f7);
+    }
+
+    .work-visual::before {
+      content: "";
+      width: 52%;
+      height: 42%;
+      position: absolute;
+      border: 10px solid #aeb5ba;
+      border-radius: 12px;
+      background: #e9ecee;
+      box-shadow: 18px 18px 0 rgba(95, 103, 108, .12);
+      transform: perspective(300px) rotateY(-12deg);
+    }
+
+    .work-visual::after {
+      content: "FRESH";
+      position: absolute;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: var(--white);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .12em;
+    }
+
+    .work-card:nth-child(2) .work-visual {
+      background: linear-gradient(145deg, #d7e1dd, #edf1ef);
+    }
+
+    .work-card:nth-child(3) .work-visual {
+      background: linear-gradient(145deg, #e5dfd4, #f5f2eb);
+    }
+
+    .work-card:nth-child(4) .work-visual {
+      background: linear-gradient(145deg, #dbe3e8, #f1f4f5);
+    }
+
+    .work-card:nth-child(5) .work-visual {
+      background: linear-gradient(145deg, #dde0d4, #f2f3ed);
+    }
+
+    .work-card:nth-child(6) .work-visual {
+      background: linear-gradient(145deg, #ddd8e4, #f4f1f6);
+    }
+
+    .work-card-info {
+      padding: 14px;
+    }
+
+    .work-card-info h3 {
+      margin: 0 0 6px;
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    .work-card-info p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .work-status {
+      display: inline-flex;
+      margin-top: 10px;
+      color: #4f6258;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .work-detail-dialog {
+      width: min(960px, calc(100% - 32px));
+      max-height: calc(100vh - 48px);
+      padding: 0;
+      border: 0;
+      border-radius: 24px;
+      color: var(--ink);
+      background: var(--white);
+      box-shadow: 0 24px 80px rgba(24, 48, 38, .24);
+    }
+
+    .work-detail-dialog::backdrop {
+      background: rgba(18, 20, 22, .72);
+      backdrop-filter: blur(8px);
+    }
+
+    .work-detail {
+      max-height: calc(100vh - 48px);
+      overflow-y: auto;
+    }
+
+    .work-detail-header {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .work-detail-header h2 {
+      margin: 0;
+      font-size: 26px;
+      letter-spacing: -.04em;
+    }
+
+    .work-detail-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0;
+      border: 0;
+      background: none;
+      color: var(--muted);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .work-detail-body {
+      display: grid;
+      grid-template-columns: 58% 42%;
+      min-height: 430px;
+    }
+
+    .work-detail-visual {
+      min-height: 430px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      background: linear-gradient(145deg, #dde2e5, #f5f6f7);
+    }
+
+    .work-detail-visual::before {
+      content: "";
+      width: 52%;
+      height: 42%;
+      border: 14px solid #aeb5ba;
+      border-radius: 16px;
+      background: #e9ecee;
+      box-shadow: 24px 24px 0 rgba(95, 103, 108, .12);
+      transform: perspective(400px) rotateY(-10deg);
+    }
+
+    .work-detail-visual::after {
+      content: "FRESH TECH";
+      position: absolute;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .12em;
+    }
+
+    .work-profile {
+      padding: 38px 32px;
+    }
+
+    .profile-label {
+      display: inline-flex;
+      margin-bottom: 18px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: #edf1ef;
+      color: #4f6258;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .work-profile h2 {
+      margin: 0 0 20px;
+      font-size: 28px;
+      line-height: 1.15;
+      letter-spacing: -.04em;
+    }
+
+    .profile-list {
+      display: grid;
+      gap: 14px;
+      margin: 0;
+    }
+
+    .profile-row {
+      display: grid;
+      grid-template-columns: 82px 1fr;
+      gap: 10px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .profile-row dt {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .profile-row dd {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .hero-actions .is-bouncing {
+      animation: button-bounce .55s ease;
+    }
+
+    @keyframes button-bounce {
+      0%, 100% { transform: translateY(0) scale(1); }
+      30% { transform: translateY(-9px) scale(1.05); }
+      55% { transform: translateY(2px) scale(.98); }
+      75% { transform: translateY(-4px) scale(1.02); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-actions .is-bouncing {
+        animation: none;
+      }
+
+      .slide-track {
+        transition: none;
+      }
+    }
+
+    .hero-visual {
+      height: 620px;
+      border-radius: 50% 0 0 50%;
+      position: relative;
+    }
+
+    .trust {
+      border-bottom: 1px solid var(--line);
+      background: var(--cream);
+    }
+
+    .trust-row {
+      min-height: 118px;
+      display: grid;
+      grid-template-columns: repeat(3, max-content);
+      justify-content: end;
+      align-items: center;
+      gap: 54px;
+    }
+
+    .partner {
+      color: #666a70;
+      font-family: "Prompt", sans-serif;
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -.03em;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 5px;
+    }
+
+    .section {
+      padding: 110px 0;
+    }
+
+    .section-heading {
+      max-width: 720px;
+      margin-bottom: 48px;
+    }
+
+    .section-heading h2 {
+      margin: 10px 0 16px;
+      font-size: clamp(38px, 5vw, 58px);
+      line-height: 1.05;
+      letter-spacing: -.055em;
+    }
+
+    .section-heading p {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .services {
+      background: var(--white);
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .service-card {
+      min-height: 330px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 34px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(24,48,38,.08);
+    }
+
+    .service-card.featured {
+      background: var(--ink);
+      color: var(--white);
+    }
+
+    .service-number {
+      display: inline-grid;
+      width: 44px;
+      height: 44px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--lime);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .service-card h3 {
+      margin: 48px 0 12px;
+      font-size: 25px;
+      letter-spacing: -.04em;
+    }
+
+    .service-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .service-card.featured p {
+      color: #c8d3cd;
+    }
+
+    .card-link {
+      margin-top: 24px;
+      font-weight: 700;
+    }
+
+    .cta {
+      margin-bottom: 40px;
+      padding: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      border-radius: 28px;
+      background: var(--lime);
+    }
+
+    .cta h2 {
+      max-width: 650px;
+      margin: 0;
+      font-size: clamp(34px, 4vw, 50px);
+      line-height: 1.05;
+      letter-spacing: -.055em;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-row {
+      min-height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .footer-copy {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .nav-actions .icon-button,
+      .nav-actions .button {
+        display: none;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 122px;
+        left: 24px;
+        right: 24px;
+        z-index: 20;
+        padding: 24px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: var(--white);
+        box-shadow: 0 18px 50px rgba(24,48,38,.12);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .menu-button {
+        display: grid;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        max-width: 700px;
+        padding: 72px 0 54px;
+      }
+
+      .hero-visual {
+        height: 420px;
+        border-radius: 32px;
+      }
+
+      .trust-row {
+        grid-template-columns: repeat(2, max-content);
+        justify-content: end;
+        padding: 26px 0;
+        gap: 22px;
+      }
+
+      .service-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-card {
+        min-height: 280px;
+      }
+
+      .work-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .cta {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: min(100% - 32px, 1180px);
+      }
+
+      .topbar {
+        font-size: 11px;
+      }
+
+      nav {
+        height: 74px;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-grid {
+        min-height: auto;
+      }
+
+      .hero-copy {
+        padding: 54px 0 38px;
+      }
+
+      h1 {
+        font-size: 48px;
+      }
+
+      .hero-copy p {
+        font-size: 16px;
+      }
+
+      .hero-actions {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero-visual {
+        height: 330px;
+      }
+
+      .partner {
+        font-size: 14px;
+      }
+
+      .section {
+        padding: 74px 0;
+      }
+
+      .work-dialog {
+        width: calc(100% - 20px);
+        max-height: calc(100vh - 20px);
+        border-radius: 18px;
+      }
+
+      .work-dialog-shell,
+      .work-gallery {
+        max-height: calc(100vh - 98px);
+      }
+
+      .work-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        padding: 12px;
+      }
+
+      .work-card-info {
+        padding: 10px;
+      }
+
+      .work-card-info h3 {
+        font-size: 14px;
+      }
+
+      .work-detail-dialog {
+        width: calc(100% - 20px);
+        max-height: calc(100vh - 20px);
+        border-radius: 18px;
+      }
+
+      .work-detail {
+        max-height: calc(100vh - 20px);
+      }
+
+      .work-detail-header h2 {
+        font-size: 20px;
+      }
+
+      .work-detail-body {
+        grid-template-columns: 1fr;
+      }
+
+      .work-detail-visual {
+        min-height: 280px;
+      }
+
+      .work-profile {
+        padding: 26px 20px;
+      }
+
+      .cta {
+        padding: 34px 24px;
+      }
+
+      .footer-row {
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        padding: 32px 0;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">รับงานทั่วประเทศ • ออกแบบ • ติดตั้ง • ประเมินราคา</div>
+
+  <header class="container">
+    <nav aria-label="เมนูหลัก">
+      <a class="brand" href="#" aria-label="Fresh Tech home">
+        <span class="brand-mark" aria-hidden="true"><span></span></span>
+        FRESH TECH
+      </a>
+
+      <div class="nav-links">
+        <a href="#services">บริการ</a>
+        <a href="#about">เกี่ยวกับเรา</a>
+        <a href="#work">ผลงาน</a>
+        <a href="#insights">บทความ</a>
+      </div>
+
+      <div class="nav-actions">
+        <button class="icon-button" type="button" aria-label="Search">⌕</button>
+        <a class="button" href="mailto:hello@freshtech.example">ติดต่อเรา / ประเมินราคา ↗</a>
+        <button class="menu-button" type="button" aria-label="Open menu">☰</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="slide-viewport">
+      <div class="slide-track" id="feature-slide-track">
+        <div class="slide-panel" id="intro-slide">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">งานดี มีคุณภาพ ได้มาตรฐาน</span>
+          <h1>รับติดตั้ง HVAC</h1>
+          <p>ติดตั้งโดยผู้เชี่ยวชาญ อุปกรณ์คุณภาพ ได้มาตรฐานอุตสาหกรรม</p>
+          <div class="hero-actions">
+            <a class="button" href="mailto:hello@freshtech.example">ติดต่อเรา / ประเมินราคา <span>→</span></a>
+            <button class="text-link" type="button" id="open-work">งานของเรา <span>↗</span></button>
+          </div>
+          <div class="hero-next">
+            <button class="button button-light" type="button" id="next-slide">หน้าถัดไป <span>→</span></button>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true"></div>
+      </div>
+    </section>
+
+        </div>
+        <div class="slide-panel" id="services-slide" aria-hidden="true" inert>
+    <section class="section services" id="services">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">What we do</span>
+          <h2>Everything your brand needs to move forward.</h2>
+          <p>From first idea to launch day, we create clear, useful and memorable experiences.</p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card">
+            <span class="service-number">01</span>
+            <div>
+              <h3>Brand strategy</h3>
+              <p>Positioning, messaging and identity systems that make your business unmistakable.</p>
+              <a class="card-link" href="mailto:hello@freshtech.example">Learn more ↗</a>
+            </div>
+          </article>
+
+          <article class="service-card featured">
+            <span class="service-number">02</span>
+            <div>
+              <h3>Digital experiences</h3>
+              <p>Fast, thoughtful websites and products designed around real people and real goals.</p>
+              <a class="card-link" href="mailto:hello@freshtech.example">Learn more ↗</a>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <span class="service-number">03</span>
+            <div>
+              <h3>Growth marketing</h3>
+              <p>Creative campaigns and practical systems that turn attention into lasting growth.</p>
+              <a class="card-link" href="mailto:hello@freshtech.example">Learn more ↗</a>
+            </div>
+          </article>
+        </div>
+        <div class="slide-controls">
+          <button class="button button-light" type="button" id="previous-slide">← หน้าก่อนหน้า</button>
+        </div>
+      </div>
+    </section>
+        </div>
+      </div>
+    </div>
+
+    <section class="trust" aria-label="บริการของเรา">
+      <div class="container trust-row">
+        <span class="partner">ท่อดัก</span>
+        <span class="partner">ระบบทำความเย็น</span>
+        <span class="partner">เครื่องทำน้ำแข็ง</span>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="work-dialog" id="work-dialog" aria-labelledby="work-dialog-title">
+    <div class="work-dialog-shell">
+      <header class="work-dialog-header">
+        <h2 id="work-dialog-title">ผลงานของเรา</h2>
+        <button class="work-dialog-close" type="button" aria-label="ปิดหน้าต่างผลงาน">×</button>
+      </header>
+      <div class="work-gallery">
+        <article class="work-card" tabindex="0" role="button" data-title="ติดตั้งแอร์สำนักงาน" data-location="อาคารสำนักงาน เขตสาทร กรุงเทพมหานคร" data-status="ดำเนินการเสร็จสิ้น" data-type="ระบบแอร์แยกส่วน" data-area="560 ตารางเมตร" data-period="มีนาคม 2568" data-detail="ออกแบบและติดตั้งระบบปรับอากาศสำหรับพื้นที่สำนักงาน พร้อมควบคุมอุณหภูมิ การไหลของอากาศ และบำรุงรักษามาตรฐาน">
+          <div class="work-visual" aria-hidden="true"></div>
+          <div class="work-card-info">
+            <h3>ติดตั้งแอร์สำนักงาน</h3>
+            <p>ระบบแยกส่วน • บริเวณกรุงเทพฯ</p>
+            <span class="work-status">งานที่ดำเนินการเสร็จสิ้น</span>
+          </div>
+        </article>
+        <article class="work-card" tabindex="0" role="button" data-title="ระบบทำความเย็นห้องเก็บ" data-location="โรงงานอุตสาหกรรมอาหาร จังหวัดสมุทรปราการ" data-status="ดำเนินการเสร็จสิ้น" data-type="ห้องเย็นและระบบจ่ายความเย็น" data-area="120 ตารางเมตร" data-period="พฤษภาคม 2568" data-detail="ออกแบบระบบทำความเย็นและห้องเก็บสำหรับสินค้าประเภทอาหาร ควบคุมอุณหภูมิและความชื้นตามมาตรฐาน">
+          <div class="work-visual" aria-hidden="true"></div>
+          <div class="work-card-info">
+            <h3>ระบบทำความเย็นห้องเก็บ</h3>
+            <p>ควบคุมอุณหภูมิ • อุตสาหกรรมอาหาร</p>
+            <span class="work-status">งานที่ดำเนินการเสร็จสิ้น</span>
+          </div>
+        </article>
+        <article class="work-card" tabindex="0" role="button" data-title="ติดตั้งเครื่องทำน้ำแข็ง" data-location="ร้านอาหาร เขตบางรัก กรุงเทพมหานคร" data-status="ดำเนินการเสร็จสิ้น" data-type="เครื่องทำน้ำแข็ง" data-area="รองรับ 300 กก./วัน" data-period="กรกฎาคม 2568" data-detail="ติดตั้งเครื่องทำน้ำแข็งและระบบน้ำประปาเฉพาะสำหรับร้านอาหาร พร้อมทดสอบคุณภาพน้ำและอุปกรณ์">
+          <div class="work-visual" aria-hidden="true"></div>
+          <div class="work-card-info">
+            <h3>ติดตั้งเครื่องทำน้ำแข็ง</h3>
+            <p>ร้านอาหาร • ระบบน้ำสะอาด</p>
+            <span class="work-status">งานที่ดำเนินการเสร็จสิ้น</span>
+          </div>
+        </article>
+        <article class="work-card" tabindex="0" role="button" data-title="งานเดินท่อดักอากาศ" data-location="โรงงานผลิตภาคอีสาน จังหวัดนครราชสีมา" data-status="ดำเนินการเสร็จสิ้น" data-type="ท่อดักและระบบระบายอากาศ" data-area="เพดาน 8 ชั้น" data-period="กันยายน 2568" data-detail="สำรวจ วางแนวท่อดัก และติดตั้งระบบระบายอากาศภายในโรงงาน พร้อมทดสอบแรงดันและการไหลของอากาศ">
+          <div class="work-visual" aria-hidden="true"></div>
+          <div class="work-card-info">
+            <h3>งานเดินท่อดักอากาศ</h3>
+            <p>โรงงานผลิต • พื้นที่ภาคอีสาน</p>
+            <span class="work-status">งานที่ดำเนินการเสร็จสิ้น</span>
+          </div>
+        </article>
+        <article class="work-card" tabindex="0" role="button" data-title="ออกแบบระบบ HVAC" data-location="อาคารพาณิชย์ เขตบางนา กรุงเทพมหานคร" data-status="ดำเนินการเสร็จสิ้น" data-type="ออกแบบและคำนวณระบบ HVAC" data-area="1,200 ตารางเมตร" data-period="ตุลาคม 2568" data-detail="คำนวณโหลด BTU เลือกเครื่องปรับอากาศและออกแบบเดินท่อ ระบบควบคุม และการระบายอากาศสำหรับอาคารพาณิชย์">
+          <div class="work-visual" aria-hidden="true"></div>
+          <div class="work-card-info">
+            <h3>ออกแบบระบบ HVAC</h3>
+            <p>อาคารพาณิชย์ • คำนวณ BTU</p>
+            <span class="work-status">งานที่ดำเนินการเสร็จสิ้น</span>
+          </div>
+        </article>
+        <article class="work-card" tabindex="0" role="button" data-title="บำรุงรักษาระบบเย็น" data-location="โรงงานภาคเหนือ จังหวัดเชียงใหม่" data-status="รับบำรุงรักษาประจำปี" data-type="ตรวจเช็กและบำรุงรักษา" data-area="6 ชุดเครื่องเย็น" data-period="เริ่มสัญญา มกราคม 2569" data-detail="ตรวจเช็กล้างทำความสะอาด วัดแรงดันน้ำยาเชื้อเพลิง ตรวจอุปกรณ์ไฟฟ้า และจัดทำรายงานบำรุงรักษาประจำงวด">
+          <div class="work-visual" aria-hidden="true"></div>
+          <div class="work-card-info">
+            <h3>บำรุงรักษาระบบเย็น</h3>
+            <p>ตรวจเช็กประจำปี • รับประกันงาน</p>
+            <span class="work-status">งานที่ดำเนินการเสร็จสิ้น</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="work-detail-dialog" id="work-detail-dialog" aria-labelledby="detail-title">
+    <div class="work-detail">
+      <header class="work-detail-header">
+        <button class="work-detail-back" type="button" id="detail-back">← กลับหน้าผลงาน</button>
+        <button class="work-dialog-close" type="button" id="detail-close" aria-label="ปิดหน้ารายละเอียดผลงาน">×</button>
+      </header>
+      <div class="work-detail-body">
+        <div class="work-detail-visual" aria-hidden="true"></div>
+        <section class="work-profile">
+          <span class="profile-label" id="detail-status">ดำเนินการเสร็จสิ้น</span>
+          <h2 id="detail-title">ชื่อโครงการ</h2>
+          <dl class="profile-list">
+            <div class="profile-row">
+              <dt>สถานที่</dt>
+              <dd id="detail-location">-</dd>
+            </div>
+            <div class="profile-row">
+              <dt>ระบบงาน</dt>
+              <dd id="detail-type">-</dd>
+            </div>
+            <div class="profile-row">
+              <dt>ขอบเขต</dt>
+              <dd id="detail-area">-</dd>
+            </div>
+            <div class="profile-row">
+              <dt>ระยะเวลา</dt>
+              <dd id="detail-period">-</dd>
+            </div>
+            <div class="profile-row">
+              <dt>ข้อมูล</dt>
+              <dd id="detail-info">-</dd>
+            </div>
+          </dl>
+        </section>
+      </div>
+    </div>
+  </dialog>
+
+  <footer>
+    <div class="container footer-row">
+      <a class="brand" href="#">
+        <span class="brand-mark" aria-hidden="true"><span></span></span>
+        FRESH TECH
+      </a>
+      <div class="footer-links">
+        <a href="#services">บริการ</a>
+        <a href="#about">เกี่ยวกับเรา</a>
+        <a href="#work">ผลงาน</a>
+        <a href="#insights">บทความ</a>
+      </div>
+      <span class="footer-copy">© 2026 Fresh Tech</span>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector(".menu-button");
+    const navLinks = document.querySelector(".nav-links");
+    const slideTrack = document.querySelector("#feature-slide-track");
+    const introSlide = document.querySelector("#intro-slide");
+    const servicesSlide = document.querySelector("#services-slide");
+    const workDialog = document.querySelector("#work-dialog");
+    const openWorkButton = document.querySelector("#open-work");
+    const closeWorkButton = workDialog.querySelector(".work-dialog-close");
+    const workDetailDialog = document.querySelector("#work-detail-dialog");
+    const detailBackButton = document.querySelector("#detail-back");
+    const detailCloseButton = document.querySelector("#detail-close");
+
+    function showServicesSlide(showServices) {
+      slideTrack.classList.toggle("show-services", showServices);
+      introSlide.inert = showServices;
+      servicesSlide.inert = !showServices;
+      introSlide.setAttribute("aria-hidden", String(showServices));
+      servicesSlide.setAttribute("aria-hidden", String(!showServices));
+    }
+
+    document.querySelectorAll(".hero-actions a, .hero-next button").forEach((link) => {
+      link.addEventListener("click", () => {
+        link.classList.add("is-bouncing");
+      });
+
+      link.addEventListener("animationend", () => {
+        link.classList.remove("is-bouncing");
+      });
+    });
+
+    document.querySelector("#next-slide").addEventListener("click", () => {
+      showServicesSlide(true);
+    });
+
+    document.querySelector("#previous-slide").addEventListener("click", () => {
+      showServicesSlide(false);
+    });
+
+    document.querySelectorAll('.nav-links a[href="#services"], .hero-actions a[href="#services"]').forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        showServicesSlide(true);
+      });
+    });
+
+    openWorkButton.addEventListener("click", () => {
+      workDialog.showModal();
+    });
+
+    closeWorkButton.addEventListener("click", () => {
+      workDialog.close();
+    });
+
+    workDialog.addEventListener("click", (event) => {
+      if (event.target === workDialog) {
+        workDialog.close();
+      }
+    });
+
+    function openWorkDetail(card) {
+      document.querySelector("#detail-title").textContent = card.dataset.title;
+      document.querySelector("#detail-location").textContent = card.dataset.location;
+      document.querySelector("#detail-status").textContent = card.dataset.status;
+      document.querySelector("#detail-type").textContent = card.dataset.type;
+      document.querySelector("#detail-area").textContent = card.dataset.area;
+      document.querySelector("#detail-period").textContent = card.dataset.period;
+      document.querySelector("#detail-info").textContent = card.dataset.detail;
+      workDialog.close();
+      workDetailDialog.showModal();
+    }
+
+    document.querySelectorAll(".work-card").forEach((card) => {
+      card.addEventListener("click", () => openWorkDetail(card));
+      card.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openWorkDetail(card);
+        }
+      });
+    });
+
+    detailBackButton.addEventListener("click", () => {
+      workDetailDialog.close();
+      workDialog.showModal();
+    });
+
+    detailCloseButton.addEventListener("click", () => {
+      workDetailDialog.close();
+    });
+
+    workDetailDialog.addEventListener("click", (event) => {
+      if (event.target === workDetailDialog) {
+        workDetailDialog.close();
+      }
+    });
+
+    document.querySelectorAll('.nav-links a[href="#work"], .footer-links a[href="#work"]').forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        workDialog.showModal();
+      });
+    });
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navLinks.addEventListener("click", (event) => {
+      if (event.target.matches("a")) {
+        navLinks.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+      }
+    });
+  </script>
+</body>
+</html>
